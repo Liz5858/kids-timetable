@@ -1,0 +1,1390 @@
+<title>우리 아이 시간표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="font-link" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="main-style">
+  :root {
+    color-scheme: light dark;
+    --bg: #F5F6FA;
+    --surface: #FFFFFF;
+    --surface-2: #EEF0F7;
+    --text: #1C1F2B;
+    --text-muted: #6C7080;
+    --border: #E2E4ED;
+    --school: #4C6FFF;
+    --school-soft: #EAEEFF;
+    --rise: #FF8B5C;
+    --rise-soft: #FFEEE4;
+    --jump: #22B27D;
+    --jump-soft: #E4F7EE;
+    --ballet: #E0568F;
+    --ballet-soft: #FCE7F0;
+    --neulbom: #8B6CEF;
+    --neulbom-soft: #EEE9FE;
+    --inline: #C98A1F;
+    --inline-soft: #FBF0DC;
+    --custom: #1B9C93;
+    --custom-soft: #E0F5F3;
+    --now: #E8384F;
+    --danger: #E14C4C;
+    --danger-soft: #FCE8E8;
+    --shadow: 0 1px 2px rgba(28,31,43,0.04), 0 8px 20px -12px rgba(28,31,43,0.18);
+    --shadow-lg: 0 12px 32px -8px rgba(28,31,43,0.28);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14151C;
+      --surface: #1D1F29;
+      --surface-2: #262835;
+      --text: #EDEEF4;
+      --text-muted: #9498AA;
+      --border: #30323F;
+      --school: #7C93FF;
+      --school-soft: #262B45;
+      --rise: #FF9E76;
+      --rise-soft: #3A2A24;
+      --jump: #4ED4A0;
+      --jump-soft: #1E3630;
+      --ballet: #F27FB0;
+      --ballet-soft: #3A2431;
+      --neulbom: #A995F7;
+      --neulbom-soft: #2C2740;
+      --inline: #E5B34D;
+      --inline-soft: #3A2E17;
+      --custom: #4FD9CF;
+      --custom-soft: #163531;
+      --now: #FF5C6C;
+      --danger: #FF7A7A;
+      --danger-soft: #3A2222;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+      --shadow-lg: 0 16px 40px -8px rgba(0,0,0,0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14151C;
+    --surface: #1D1F29;
+    --surface-2: #262835;
+    --text: #EDEEF4;
+    --text-muted: #9498AA;
+    --border: #30323F;
+    --school: #7C93FF;
+    --school-soft: #262B45;
+    --rise: #FF9E76;
+    --rise-soft: #3A2A24;
+    --jump: #4ED4A0;
+    --jump-soft: #1E3630;
+    --ballet: #F27FB0;
+    --ballet-soft: #3A2431;
+    --neulbom: #A995F7;
+    --neulbom-soft: #2C2740;
+    --inline: #E5B34D;
+    --inline-soft: #3A2E17;
+    --custom: #4FD9CF;
+    --custom-soft: #163531;
+    --now: #FF5C6C;
+    --danger: #FF7A7A;
+    --danger-soft: #3A2222;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    --shadow-lg: 0 16px 40px -8px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  :focus-visible {
+    outline: 2px solid var(--school);
+    outline-offset: 2px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", -apple-system, "Malgun Gothic", sans-serif;
+    padding-inline: 16px;
+    padding-block: 14px 28px;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100dvh;
+  }
+
+  h1, .display {
+    font-family: "Jua", "Noto Sans KR", sans-serif;
+    font-weight: 400;
+  }
+
+  header.page-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    padding-block: 6px 16px;
+  }
+
+  header.page-head h1 {
+    font-size: 22px;
+    margin: 0;
+    letter-spacing: -0.2px;
+  }
+
+  header.page-head .subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .view-switch {
+    display: flex;
+    gap: 4px;
+    background: var(--surface-2);
+    padding: 4px;
+    border-radius: 12px;
+    margin-block: 2px 4px;
+  }
+
+  .view-switch button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: "Jua", sans-serif;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    padding-block: 8px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+
+  .view-switch button[aria-selected="true"] {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: var(--shadow);
+  }
+
+  nav.day-tabs {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    background: var(--bg);
+    padding-block: 8px 14px;
+  }
+
+  nav.day-tabs button {
+    font-family: "Jua", sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding-block: 9px 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease, transform .1s ease;
+  }
+
+  nav.day-tabs button:active { transform: scale(0.96); }
+
+  nav.day-tabs button .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: transparent;
+  }
+
+  nav.day-tabs button[aria-selected="true"] {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  nav.day-tabs button[aria-selected="true"] .dot {
+    background: var(--rise);
+  }
+
+  nav.day-tabs button.is-today:not([aria-selected="true"]) {
+    color: var(--school);
+    border-color: var(--school);
+  }
+
+  section.day-panel { display: none; }
+  section.day-panel[hidden] { display: none; }
+  section.day-panel:not([hidden]) { display: block; }
+
+  .day-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 2px 14px;
+  }
+
+  .day-summary .label {
+    font-family: "Jua", sans-serif;
+    font-size: 18px;
+  }
+
+  .day-summary .count {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  ol.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ol.timeline li {
+    display: grid;
+    grid-template-columns: 56px 20px 1fr;
+    column-gap: 4px;
+  }
+
+  .rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rail .node {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--item-color);
+    margin-top: 4px;
+    box-shadow: 0 0 0 4px var(--item-soft);
+  }
+
+  .rail .line {
+    flex: 1;
+    width: 2px;
+    background: var(--border);
+    margin-block: 2px;
+  }
+
+  li:last-child .rail .line { display: none; }
+
+  .time-col {
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding-top: 5px;
+    line-height: 1.3;
+  }
+
+  .time-col .end {
+    font-weight: 500;
+    opacity: 0.75;
+  }
+
+  .card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--item-color);
+    border-radius: 12px;
+    padding: 11px 13px;
+    margin-block: 0 10px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform .1s ease;
+  }
+
+  .card:active { transform: scale(0.98); }
+
+  .card .top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card .icon {
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  .card .name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .card .tag {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--item-color);
+    background: var(--item-soft);
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+
+  .card .meta {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-weight: 500;
+  }
+
+  .empty-note {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    text-align: center;
+    padding-block: 10px 2px;
+  }
+
+  .add-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .add-inline-btn {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--school);
+    background: var(--school-soft);
+    border: none;
+    border-radius: 999px;
+    padding: 7px 13px;
+    cursor: pointer;
+  }
+
+  .week-wrap[hidden] { display: none; }
+
+  .week-head {
+    display: grid;
+    grid-template-columns: 26px repeat(6, 1fr);
+    gap: 3px;
+    margin-bottom: 5px;
+  }
+
+  .week-head button {
+    font-family: "Jua", sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding-block: 6px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+  }
+
+  .week-head button .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--rise);
+    opacity: 0;
+  }
+
+  .week-head button.is-today {
+    color: var(--school);
+    border-color: var(--school);
+  }
+
+  .week-head button.is-today .dot { opacity: 1; }
+
+  .week-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 26px repeat(6, 1fr);
+    gap: 3px;
+    background-image: repeating-linear-gradient(to bottom, var(--border) 0, var(--border) 1px, transparent 1px, transparent 44px);
+  }
+
+  .week-axis {
+    position: relative;
+  }
+
+  .week-axis span {
+    position: absolute;
+    right: 3px;
+    transform: translateY(-50%);
+    font-size: 9px;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+  }
+
+  .week-day-col {
+    position: relative;
+    border-radius: 6px;
+  }
+
+  .week-day-col.is-today-col {
+    background: var(--surface-2);
+  }
+
+  .week-block {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    border: none;
+    font: inherit;
+    text-align: left;
+    border-radius: 5px;
+    border-left: 3px solid var(--item-color);
+    background: var(--item-soft);
+    padding: 2px 3px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .week-block .wb-name {
+    display: block;
+    font-size: 8.5px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .week-block .wb-time {
+    display: block;
+    font-size: 7.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .now-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--now);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .now-line::before {
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--now);
+    transform: translateY(-50%);
+  }
+
+  .week-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .week-legend .tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .week-legend .swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--sw-color);
+  }
+
+  footer.note {
+    margin-top: 22px;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .fab {
+    position: fixed;
+    right: 18px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: var(--school);
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .12s ease;
+  }
+
+  .fab:active { transform: scale(0.94); }
+  .fab[hidden] { display: none; }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 11, 16, 0.45);
+    z-index: 30;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-backdrop[hidden] { display: none; }
+
+  .modal-sheet {
+    width: 100%;
+    max-width: 480px;
+    max-height: 88dvh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-radius: 18px 18px 0 0;
+    padding: 18px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .modal-head h2 {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .modal-close {
+    border: none;
+    background: var(--surface-2);
+    color: var(--text-muted);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .field {
+    margin-bottom: 13px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+
+  .field input[type="text"],
+  .field input[type="time"],
+  .field select {
+    width: 100%;
+    font: inherit;
+    font-size: 14.5px;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 11px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .field-row.icon-row {
+    grid-template-columns: 64px 1fr;
+  }
+
+  .form-error {
+    font-size: 12px;
+    color: var(--danger);
+    font-weight: 600;
+    margin: -4px 0 10px;
+    min-height: 1em;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .btn {
+    flex: 1;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--school);
+    color: #fff;
+  }
+
+  .btn-danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+  }
+
+  .btn-danger.btn-danger-confirm {
+    background: var(--danger);
+    color: #fff;
+  }
+
+  .btn[disabled] {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text);
+    color: var(--bg);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-lg);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+
+<div id="pageRoot">
+  <header class="page-head">
+    <h1>📚 우리 아이 시간표</h1>
+    <span class="subtitle" id="todayLabel"></span>
+  </header>
+
+  <div class="view-switch" id="viewSwitch" role="tablist" aria-label="보기 방식">
+    <button type="button" id="switch-day" role="tab" aria-selected="true">📋 요일별</button>
+    <button type="button" id="switch-week" role="tab" aria-selected="false">🗓️ 주간</button>
+  </div>
+
+  <div id="dayView">
+    <nav class="day-tabs" id="dayTabs" role="tablist" aria-label="요일 선택"></nav>
+    <main id="panels"></main>
+  </div>
+
+  <div class="week-wrap" id="weekView" hidden>
+    <div class="week-head" id="weekHead"></div>
+    <div class="week-grid" id="weekGrid"></div>
+    <div class="week-legend" id="weekLegend"></div>
+  </div>
+
+  <footer class="note" id="footerNote">일정을 눌러서 수정하거나, + 버튼으로 새 일정을 추가할 수 있어요.</footer>
+
+  <button type="button" class="fab" id="fabAdd" aria-label="일정 추가">＋</button>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h2 id="modalTitle">일정 추가</h2>
+        <button type="button" class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+      </div>
+      <div class="field">
+        <label for="f-day">요일</label>
+        <select id="f-day"></select>
+      </div>
+      <div class="field">
+        <label for="f-name">일정 이름</label>
+        <input type="text" id="f-name" placeholder="예: 미술학원" maxlength="20">
+      </div>
+      <div class="field field-row icon-row">
+        <div>
+          <label for="f-icon">아이콘</label>
+          <input type="text" id="f-icon" maxlength="4">
+        </div>
+        <div>
+          <label for="f-type">종류(색상)</label>
+          <select id="f-type"></select>
+        </div>
+      </div>
+      <div class="field field-row">
+        <div>
+          <label for="f-start">시작 시간</label>
+          <input type="time" id="f-start">
+        </div>
+        <div>
+          <label for="f-end">종료 시간</label>
+          <input type="time" id="f-end">
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-detail">설명 (선택)</label>
+        <input type="text" id="f-detail" placeholder="예: 5교시 수업" maxlength="24">
+      </div>
+      <p class="form-error" id="formError"></p>
+      <div class="modal-actions" id="modalActions">
+        <button type="button" class="btn btn-danger" id="btnDelete" hidden>삭제</button>
+        <button type="button" class="btn btn-primary" id="btnSave">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script type="application/json" id="schedule-data">[
+  {
+    "key": "mon", "label": "월", "full": "월요일",
+    "items": [
+      { "id": "itm01", "name": "학교", "detail": "5교시 수업", "start": "09:00", "end": "13:40", "type": "school", "icon": "🏫" },
+      { "id": "itm_mu51t4yfa7lkp", "name": "피아노", "detail": "", "start": "14:00", "end": "15:00", "type": "inline", "icon": "🛼" },
+      { "id": "itm02", "name": "Rise", "detail": "방과후 수업", "start": "15:00", "end": "16:30", "type": "rise", "icon": "🌅" }
+    ]
+  },
+  {
+    "key": "tue", "label": "화", "full": "화요일",
+    "items": [
+      { "id": "itm03", "name": "학교", "detail": "5교시 수업", "start": "09:00", "end": "13:40", "type": "school", "icon": "🏫" },
+      { "id": "itm04", "name": "방과후 줄넘기", "detail": "방과후 수업", "start": "13:50", "end": "15:20", "type": "jump", "icon": "🤸" },
+      { "id": "itm05", "name": "인라인", "detail": "학원 수업", "start": "16:00", "end": "17:00", "type": "inline", "icon": "🛼" }
+    ]
+  },
+  {
+    "key": "wed", "label": "수", "full": "수요일",
+    "items": [
+      { "id": "itm06", "name": "학교", "detail": "4교시 수업", "start": "09:00", "end": "12:40", "type": "school", "icon": "🏫" },
+      { "id": "itm07", "name": "늘봄", "detail": "늘봄교실", "start": "12:50", "end": "13:40", "type": "neulbom", "icon": "🌱" },
+      { "id": "itm08", "name": "Rise", "detail": "방과후 수업", "start": "15:00", "end": "16:30", "type": "rise", "icon": "🌅" }
+    ]
+  },
+  {
+    "key": "thu", "label": "목", "full": "목요일",
+    "items": [
+      { "id": "itm09", "name": "학교", "detail": "5교시 수업", "start": "09:00", "end": "13:40", "type": "school", "icon": "🏫" },
+      { "id": "itm10", "name": "늘봄", "detail": "늘봄교실", "start": "13:50", "end": "15:20", "type": "neulbom", "icon": "🌱" },
+      { "id": "itm_mu51xw6xp5yr5", "name": "모나르떼", "detail": "", "start": "18:00", "end": "19:00", "type": "custom", "icon": "⭐" }
+    ]
+  },
+  {
+    "key": "fri", "label": "금", "full": "금요일",
+    "items": [
+      { "id": "itm11", "name": "학교", "detail": "4교시 수업", "start": "09:00", "end": "12:40", "type": "school", "icon": "🏫" },
+      { "id": "itm12", "name": "Rise", "detail": "방과후 수업", "start": "15:00", "end": "16:30", "type": "rise", "icon": "🌅" }
+    ]
+  },
+  {
+    "key": "sat", "label": "토", "full": "토요일",
+    "items": [
+      { "id": "itm13", "name": "발레", "detail": "학원 수업", "start": "11:00", "end": "12:00", "type": "ballet", "icon": "🩰" }
+    ]
+  }
+]</script>
+
+<script id="main-script">
+(function () {
+  "use strict";
+
+  var HOUR_PX = 44;
+  var DATA_ID = "schedule-data";
+
+  var TYPE_META = {
+    school:  { color: "var(--school)",  soft: "var(--school-soft)",  tag: "학교",  defaultIcon: "🏫", optionLabel: "🏫 학교 (파랑)" },
+    rise:    { color: "var(--rise)",    soft: "var(--rise-soft)",    tag: "방과후", defaultIcon: "🌅", optionLabel: "🌅 방과후 (주황)" },
+    jump:    { color: "var(--jump)",    soft: "var(--jump-soft)",    tag: "방과후", defaultIcon: "🤸", optionLabel: "🤸 방과후 (초록)" },
+    ballet:  { color: "var(--ballet)",  soft: "var(--ballet-soft)",  tag: "학원",  defaultIcon: "🩰", optionLabel: "🩰 학원 (핑크)" },
+    neulbom: { color: "var(--neulbom)", soft: "var(--neulbom-soft)", tag: "늘봄",  defaultIcon: "🌱", optionLabel: "🌱 늘봄 (보라)" },
+    inline:  { color: "var(--inline)",  soft: "var(--inline-soft)",  tag: "학원",  defaultIcon: "🛼", optionLabel: "🛼 학원 (노랑)" },
+    custom:  { color: "var(--custom)",  soft: "var(--custom-soft)",  tag: "기타",  defaultIcon: "⭐", optionLabel: "⭐ 기타 (틸)" }
+  };
+  var TYPE_ORDER = ["school", "rise", "jump", "ballet", "neulbom", "inline", "custom"];
+
+  function loadData() {
+    var el = document.getElementById(DATA_ID);
+    try {
+      var parsed = JSON.parse(el.textContent);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    } catch (e) {}
+    return [];
+  }
+
+  var DAYS = loadData();
+
+  function toMinutes(hhmm) {
+    var p = hhmm.split(":");
+    return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+  }
+
+  function fmtClock(hhmm) {
+    var p = hhmm.split(":");
+    var h = parseInt(p[0], 10);
+    var period = h < 12 ? "오전" : "오후";
+    var h12 = h % 12; if (h12 === 0) h12 = 12;
+    return period + " " + h12 + ":" + p[1];
+  }
+
+  function fmtShort(hhmm) {
+    var p = hhmm.split(":");
+    return parseInt(p[0], 10) + ":" + p[1];
+  }
+
+  function plusOneHour(hhmm) {
+    var m = Math.min(toMinutes(hhmm) + 60, 23 * 60 + 59);
+    var h = Math.floor(m / 60), mm = m % 60;
+    return (h < 10 ? "0" : "") + h + ":" + (mm < 10 ? "0" : "") + mm;
+  }
+
+  function genId() {
+    return "itm_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  }
+
+  function findItem(id) {
+    for (var i = 0; i < DAYS.length; i++) {
+      var items = DAYS[i].items;
+      for (var j = 0; j < items.length; j++) {
+        if (items[j].id === id) return { day: DAYS[i], item: items[j], dayIndex: i, itemIndex: j };
+      }
+    }
+    return null;
+  }
+
+  function sortDayItems(day) {
+    day.items.sort(function (a, b) { return toMinutes(a.start) - toMinutes(b.start); });
+  }
+
+  var todayLabelEl = document.getElementById("todayLabel");
+  var tabsEl = document.getElementById("dayTabs");
+  var panelsEl = document.getElementById("panels");
+  var weekHeadEl = document.getElementById("weekHead");
+  var weekGridEl = document.getElementById("weekGrid");
+  var weekLegendEl = document.getElementById("weekLegend");
+
+  var jsDay = new Date().getDay();
+  var weekdayIdx = jsDay >= 1 && jsDay <= 6 ? jsDay - 1 : null;
+  var todayKey = weekdayIdx !== null ? (DAYS[weekdayIdx] ? DAYS[weekdayIdx].key : null) : null;
+
+  todayLabelEl.textContent = (todayKey && DAYS[weekdayIdx])
+    ? DAYS[weekdayIdx].full + " 기준"
+    : "일요일, 쉬는 날이에요 🌤️";
+
+  var currentDayKey = null;
+  var dayColEls = {};
+  var nowLineTimer = null;
+
+  // ---------------- day view ----------------
+  function renderDayView() {
+    tabsEl.innerHTML = "";
+    panelsEl.innerHTML = "";
+
+    var savedTab = null;
+    try { savedTab = localStorage.getItem("timetable_last_day"); } catch (e) {}
+    var initialKey = currentDayKey || todayKey || savedTab || "mon";
+    if (!DAYS.some(function (d) { return d.key === initialKey; })) initialKey = DAYS[0] ? DAYS[0].key : null;
+
+    DAYS.forEach(function (day) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.role = "tab";
+      btn.id = "tab-" + day.key;
+      btn.setAttribute("aria-controls", "panel-" + day.key);
+      btn.setAttribute("aria-selected", "false");
+      if (day.key === todayKey) btn.classList.add("is-today");
+      btn.innerHTML = day.label + '<span class="dot"></span>';
+      btn.addEventListener("click", function () { selectDay(day.key); });
+      tabsEl.appendChild(btn);
+
+      var panel = document.createElement("section");
+      panel.className = "day-panel";
+      panel.id = "panel-" + day.key;
+      panel.setAttribute("role", "tabpanel");
+      panel.hidden = true;
+
+      var summary = document.createElement("div");
+      summary.className = "day-summary";
+      summary.innerHTML =
+        '<span class="label">' + day.full + '</span>' +
+        '<span class="count">일정 ' + day.items.length + '개</span>';
+      panel.appendChild(summary);
+
+      var addRow = document.createElement("div");
+      addRow.className = "add-row";
+      var addBtn = document.createElement("button");
+      addBtn.type = "button";
+      addBtn.className = "add-inline-btn";
+      addBtn.textContent = "+ 이 요일에 일정 추가";
+      addBtn.addEventListener("click", function () { openAddModal(day.key); });
+      addRow.appendChild(addBtn);
+      panel.appendChild(addRow);
+
+      if (day.items.length === 0) {
+        var empty = document.createElement("p");
+        empty.className = "empty-note";
+        empty.textContent = "등록된 일정이 없어요.";
+        panel.appendChild(empty);
+      } else {
+        var ol = document.createElement("ol");
+        ol.className = "timeline";
+        day.items.forEach(function (item) {
+          var meta = TYPE_META[item.type] || TYPE_META.custom;
+          var li = document.createElement("li");
+          li.innerHTML =
+            '<div class="time-col">' + fmtClock(item.start) + '<div class="end">' + fmtClock(item.end) + '</div></div>' +
+            '<div class="rail"><div class="node" style="--item-color:' + meta.color + ';--item-soft:' + meta.soft + '"></div><div class="line"></div></div>' +
+            '<div></div>';
+          var cardWrap = li.lastElementChild;
+          var card = document.createElement("button");
+          card.type = "button";
+          card.className = "card";
+          card.style.setProperty("--item-color", meta.color);
+          card.style.setProperty("--item-soft", meta.soft);
+          card.innerHTML =
+            '<div class="top-row">' +
+              '<span class="icon">' + item.icon + '</span>' +
+              '<span class="name">' + item.name + '</span>' +
+              '<span class="tag">' + meta.tag + '</span>' +
+            '</div>' +
+            '<div class="meta">' + (item.detail || "") + '</div>';
+          card.addEventListener("click", function () { openEditModal(item.id); });
+          cardWrap.appendChild(card);
+          ol.appendChild(li);
+        });
+        panel.appendChild(ol);
+      }
+
+      panelsEl.appendChild(panel);
+    });
+
+    selectDay(initialKey);
+  }
+
+  function selectDay(key) {
+    currentDayKey = key;
+    DAYS.forEach(function (day) {
+      var tabBtn = document.getElementById("tab-" + day.key);
+      var panelEl = document.getElementById("panel-" + day.key);
+      if (!tabBtn || !panelEl) return;
+      var isActive = day.key === key;
+      tabBtn.setAttribute("aria-selected", isActive ? "true" : "false");
+      panelEl.hidden = !isActive;
+    });
+    try { localStorage.setItem("timetable_last_day", key); } catch (e) {}
+  }
+
+  // ---------------- week view ----------------
+  function renderWeekView() {
+    weekHeadEl.innerHTML = "";
+    weekGridEl.innerHTML = "";
+    weekLegendEl.innerHTML = "";
+    dayColEls = {};
+
+    var allStarts = [], allEnds = [];
+    DAYS.forEach(function (day) {
+      day.items.forEach(function (item) {
+        allStarts.push(toMinutes(item.start));
+        allEnds.push(toMinutes(item.end));
+      });
+    });
+    if (!allStarts.length) { allStarts = [540]; allEnds = [1020]; }
+
+    var rangeStart = Math.floor(Math.min.apply(null, allStarts) / 60) * 60;
+    var rangeEnd = Math.ceil(Math.max.apply(null, allEnds) / 60) * 60;
+    var totalPx = (rangeEnd - rangeStart) / 60 * HOUR_PX;
+
+    var headCorner = document.createElement("div");
+    weekHeadEl.appendChild(headCorner);
+
+    var axisEl = document.createElement("div");
+    axisEl.className = "week-axis";
+    axisEl.style.height = totalPx + "px";
+    for (var hr = rangeStart; hr <= rangeEnd; hr += 60) {
+      var lbl = document.createElement("span");
+      lbl.style.top = ((hr - rangeStart) / 60 * HOUR_PX) + "px";
+      lbl.textContent = String(hr / 60);
+      axisEl.appendChild(lbl);
+    }
+    weekGridEl.appendChild(axisEl);
+    weekGridEl.style.height = totalPx + "px";
+
+    DAYS.forEach(function (day) {
+      var headBtn = document.createElement("button");
+      headBtn.type = "button";
+      if (day.key === todayKey) headBtn.classList.add("is-today");
+      headBtn.innerHTML = day.label + '<span class="dot"></span>';
+      headBtn.addEventListener("click", function () {
+        switchView("day");
+        selectDay(day.key);
+      });
+      weekHeadEl.appendChild(headBtn);
+
+      var col = document.createElement("div");
+      col.className = "week-day-col";
+      if (day.key === todayKey) col.classList.add("is-today-col");
+      col.style.height = totalPx + "px";
+
+      day.items.forEach(function (item) {
+        var meta = TYPE_META[item.type] || TYPE_META.custom;
+        var sM = toMinutes(item.start), eM = toMinutes(item.end);
+        var top = (sM - rangeStart) / 60 * HOUR_PX;
+        var height = Math.max((eM - sM) / 60 * HOUR_PX - 2, 15);
+        var block = document.createElement("button");
+        block.type = "button";
+        block.className = "week-block";
+        block.style.top = top + "px";
+        block.style.height = height + "px";
+        block.style.setProperty("--item-color", meta.color);
+        block.style.setProperty("--item-soft", meta.soft);
+        block.innerHTML =
+          '<span class="wb-name">' + item.name + '</span>' +
+          '<span class="wb-time">' + fmtShort(item.start) + '–' + fmtShort(item.end) + '</span>';
+        block.addEventListener("click", function () { openEditModal(item.id); });
+        col.appendChild(block);
+      });
+
+      weekGridEl.appendChild(col);
+      dayColEls[day.key] = col;
+    });
+
+    var seenTypes = {};
+    DAYS.forEach(function (day) {
+      day.items.forEach(function (item) {
+        if (seenTypes[item.name]) return;
+        seenTypes[item.name] = true;
+        var meta = TYPE_META[item.type] || TYPE_META.custom;
+        var tag = document.createElement("span");
+        tag.className = "tag";
+        tag.style.setProperty("--sw-color", meta.color);
+        tag.innerHTML = '<span class="swatch"></span>' + item.name;
+        weekLegendEl.appendChild(tag);
+      });
+    });
+
+    updateNowLine(rangeStart, rangeEnd);
+    if (nowLineTimer) clearInterval(nowLineTimer);
+    nowLineTimer = setInterval(function () { updateNowLine(rangeStart, rangeEnd); }, 60000);
+  }
+
+  function updateNowLine(rangeStart, rangeEnd) {
+    var existing = document.querySelector(".now-line");
+    if (existing) existing.remove();
+    var now = new Date();
+    var nowJsDay = now.getDay();
+    var nowKey = (nowJsDay >= 1 && nowJsDay <= 6 && DAYS[nowJsDay - 1]) ? DAYS[nowJsDay - 1].key : null;
+    if (!nowKey || !dayColEls[nowKey]) return;
+    var nowMin = now.getHours() * 60 + now.getMinutes();
+    if (nowMin < rangeStart || nowMin > rangeEnd) return;
+    var line = document.createElement("div");
+    line.className = "now-line";
+    line.style.top = ((nowMin - rangeStart) / 60 * HOUR_PX) + "px";
+    dayColEls[nowKey].appendChild(line);
+  }
+
+  function renderAll() {
+    renderDayView();
+    renderWeekView();
+  }
+
+  // ---------------- view switch ----------------
+  var dayViewEl = document.getElementById("dayView");
+  var weekViewEl = document.getElementById("weekView");
+  var switchDayBtn = document.getElementById("switch-day");
+  var switchWeekBtn = document.getElementById("switch-week");
+
+  function switchView(mode) {
+    var isDay = mode === "day";
+    dayViewEl.hidden = !isDay;
+    weekViewEl.hidden = isDay;
+    switchDayBtn.setAttribute("aria-selected", isDay ? "true" : "false");
+    switchWeekBtn.setAttribute("aria-selected", isDay ? "false" : "true");
+    try { localStorage.setItem("timetable_last_view", mode); } catch (e) {}
+  }
+
+  switchDayBtn.addEventListener("click", function () { switchView("day"); });
+  switchWeekBtn.addEventListener("click", function () { switchView("week"); });
+
+  // ---------------- toast ----------------
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2600);
+  }
+
+  // ---------------- modal ----------------
+  var backdrop = document.getElementById("modalBackdrop");
+  var modalTitle = document.getElementById("modalTitle");
+  var fDay = document.getElementById("f-day");
+  var fName = document.getElementById("f-name");
+  var fIcon = document.getElementById("f-icon");
+  var fType = document.getElementById("f-type");
+  var fStart = document.getElementById("f-start");
+  var fEnd = document.getElementById("f-end");
+  var fDetail = document.getElementById("f-detail");
+  var formError = document.getElementById("formError");
+  var btnSave = document.getElementById("btnSave");
+  var btnDelete = document.getElementById("btnDelete");
+  var fabAdd = document.getElementById("fabAdd");
+
+  DAYS.forEach(function (day) {
+    var opt = document.createElement("option");
+    opt.value = day.key;
+    opt.textContent = day.full;
+    fDay.appendChild(opt);
+  });
+  TYPE_ORDER.forEach(function (key) {
+    var opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = TYPE_META[key].optionLabel;
+    fType.appendChild(opt);
+  });
+  fType.addEventListener("change", function () {
+    fIcon.value = TYPE_META[fType.value].defaultIcon;
+  });
+  fStart.addEventListener("change", function () {
+    if (fStart.value) fEnd.value = plusOneHour(fStart.value);
+  });
+
+  var editingId = null;
+  var deleteConfirming = false;
+
+  function resetDeleteConfirm() {
+    deleteConfirming = false;
+    btnDelete.textContent = "삭제";
+    btnDelete.classList.remove("btn-danger-confirm");
+  }
+
+  function openAddModal(dayKey) {
+    editingId = null;
+    resetDeleteConfirm();
+    modalTitle.textContent = "일정 추가";
+    fDay.value = dayKey || currentDayKey || (DAYS[0] && DAYS[0].key);
+    fName.value = "";
+    fType.value = "custom";
+    fIcon.value = TYPE_META.custom.defaultIcon;
+    fStart.value = "09:00";
+    fEnd.value = "10:00";
+    fDetail.value = "";
+    formError.textContent = "";
+    btnDelete.hidden = true;
+    openModal();
+  }
+
+  function openEditModal(itemId) {
+    var found = findItem(itemId);
+    if (!found) return;
+    editingId = itemId;
+    resetDeleteConfirm();
+    modalTitle.textContent = "일정 수정";
+    fDay.value = found.day.key;
+    fName.value = found.item.name;
+    fType.value = TYPE_META[found.item.type] ? found.item.type : "custom";
+    fIcon.value = found.item.icon;
+    fStart.value = found.item.start;
+    fEnd.value = found.item.end;
+    fDetail.value = found.item.detail || "";
+    formError.textContent = "";
+    btnDelete.hidden = false;
+    openModal();
+  }
+
+  function openModal() {
+    backdrop.hidden = false;
+    setTimeout(function () { fName.focus(); }, 30);
+  }
+
+  function closeModal() {
+    backdrop.hidden = true;
+    resetDeleteConfirm();
+  }
+
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  backdrop.addEventListener("click", function (e) { if (e.target === backdrop) closeModal(); });
+  fabAdd.addEventListener("click", function () { openAddModal(currentDayKey); });
+
+  btnDelete.addEventListener("click", function () {
+    if (!deleteConfirming) {
+      deleteConfirming = true;
+      btnDelete.textContent = "정말 삭제할까요?";
+      btnDelete.classList.add("btn-danger-confirm");
+      return;
+    }
+    if (!editingId) return;
+    var found = findItem(editingId);
+    if (!found) { closeModal(); return; }
+    var snapshot = JSON.parse(JSON.stringify(DAYS));
+    found.day.items.splice(found.itemIndex, 1);
+    closeModal();
+    renderAll();
+    saveAndPublish(snapshot, "일정을 삭제했어요.");
+  });
+
+  btnSave.addEventListener("click", function () {
+    var dayKey = fDay.value;
+    var name = fName.value.trim();
+    var icon = fIcon.value.trim() || TYPE_META[fType.value].defaultIcon;
+    var type = fType.value;
+    var start = fStart.value;
+    var end = fEnd.value;
+    var detail = fDetail.value.trim();
+
+    if (!name) { formError.textContent = "일정 이름을 입력해 주세요."; return; }
+    if (!start || !end) { formError.textContent = "시작/종료 시간을 선택해 주세요."; return; }
+    if (toMinutes(end) <= toMinutes(start)) { formError.textContent = "종료 시간은 시작 시간보다 늦어야 해요."; return; }
+    formError.textContent = "";
+
+    var targetDay = DAYS.filter(function (d) { return d.key === dayKey; })[0];
+    if (!targetDay) return;
+
+    var snapshot = JSON.parse(JSON.stringify(DAYS));
+
+    if (editingId) {
+      var found = findItem(editingId);
+      if (found) {
+        if (found.day.key !== dayKey) {
+          found.day.items.splice(found.itemIndex, 1);
+          targetDay.items.push({ id: editingId, name: name, detail: detail, start: start, end: end, type: type, icon: icon });
+        } else {
+          found.item.name = name;
+          found.item.detail = detail;
+          found.item.start = start;
+          found.item.end = end;
+          found.item.type = type;
+          found.item.icon = icon;
+        }
+      }
+    } else {
+      targetDay.items.push({ id: genId(), name: name, detail: detail, start: start, end: end, type: type, icon: icon });
+    }
+
+    DAYS.forEach(sortDayItems);
+    currentDayKey = dayKey;
+    closeModal();
+    renderAll();
+    saveAndPublish(snapshot, editingId ? "일정을 수정했어요." : "일정을 추가했어요.");
+  });
+
+  // ---------------- persistence (artifact self-publish) ----------------
+  var artifactCap = null;
+  var writable = true;
+
+  function initCapability() {
+    if (!(window.claude && typeof window.claude.use === "function")) {
+      writable = false;
+      fabAdd.hidden = true;
+      return;
+    }
+    window.claude.use("artifact").then(function (cap) {
+      artifactCap = cap;
+      if (!cap) {
+        writable = false;
+        fabAdd.hidden = true;
+      }
+    }).catch(function () {
+      writable = false;
+      fabAdd.hidden = true;
+    });
+  }
+
+  function buildFullHTML() {
+    var styleHTML = document.getElementById("main-style").outerHTML;
+    var fontLinkHTML = document.getElementById("font-link").outerHTML;
+    var rootClone = document.getElementById("pageRoot").cloneNode(true);
+    var dataJSON = JSON.stringify(DAYS).replace(/<\//g, "<\\/");
+
+    var doc = "<!doctype html>\n<html lang=\"ko\">\n<head>\n" +
+      "<meta charset=\"UTF-8\">\n" +
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n" +
+      "<title>우리 아이 시간표</title>\n" +
+      fontLinkHTML + "\n" +
+      styleHTML + "\n" +
+      "</head>\n<body>\n" +
+      rootClone.outerHTML + "\n" +
+      '<script type="application/json" id="' + DATA_ID + '">' + dataJSON + "<\/script>\n" +
+      '<script id="main-script">' + document.getElementById("main-script").textContent + "<\/script>\n" +
+      "</body>\n</html>";
+    return doc;
+  }
+
+  function saveAndPublish(prevSnapshot, successMsg) {
+    if (!writable || !artifactCap) {
+      showToast("지금은 저장할 수 없어요 (읽기 전용 보기)");
+      return;
+    }
+    var html = buildFullHTML();
+    btnSave.disabled = true;
+    artifactCap.publish(html).then(function () {
+      showToast(successMsg);
+    }).catch(function (err) {
+      btnSave.disabled = false;
+      var code = err && err.code;
+      if (code === "conflict") {
+        return; // view is already reloading to the winning version
+      }
+      if (code === "not_writer" || code === "not_granted" || code === "not_declared" || code === "capability_disabled") {
+        writable = false;
+        fabAdd.hidden = true;
+        showToast("이 보기에서는 수정할 수 없어요 (읽기 전용)");
+      } else {
+        showToast("저장에 실패했어요. 다시 시도해 주세요.");
+      }
+      DAYS.length = 0;
+      Array.prototype.push.apply(DAYS, prevSnapshot);
+      renderAll();
+    });
+  }
+
+  // ---------------- init ----------------
+  var savedView = null;
+  try { savedView = localStorage.getItem("timetable_last_view"); } catch (e) {}
+  renderAll();
+  switchView(savedView === "week" ? "week" : "day");
+  initCapability();
+})();
+</script>
