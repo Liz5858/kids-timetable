@@ -1,4 +1,5 @@
 <title>우리 아이 시간표</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="font-link" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -616,8 +617,9 @@
   .field input[type="time"],
   .field select {
     width: 100%;
+    min-width: 0;
     font: inherit;
-    font-size: 14.5px;
+    font-size: 16px;
     color: var(--text);
     background: var(--surface-2);
     border: 1px solid var(--border);
@@ -627,12 +629,12 @@
 
   .field-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
   .field-row.icon-row {
-    grid-template-columns: 64px 1fr;
+    grid-template-columns: 64px minmax(0, 1fr);
   }
 
   .form-error {
